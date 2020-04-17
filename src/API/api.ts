@@ -34,7 +34,6 @@ type GetImages = {
 
 export const Images_API = {
     getImages(page: number, token: string) {
-        debugger
         return instance
             .get<GetImages>(`images?page=${page}`, {
                 headers: {

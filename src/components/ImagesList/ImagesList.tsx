@@ -11,6 +11,7 @@ type MapState = {
     page: number
     pageCount: number
     pictures: Array<Image>
+    countOfItemsOnPage: number
 }
 
 type MapDispatch = {
@@ -35,6 +36,7 @@ class ImagesList extends React.Component<Props, {}> {
                     pageCount={this.props.pageCount}
                     page={this.props.page}
                     loadPictures={this.loadPictures}
+                    countOfItemsOnPage={this.props.countOfItemsOnPage}
                />
                <Images
                     pictures={this.props.pictures}
@@ -48,7 +50,8 @@ const MapStateToProps = (state: GlobalState): MapState => ({
     token: state.AuthReducer.token,
     page: state.ImagesReducer.page,
     pageCount: state.ImagesReducer.pageCount as number,
-    pictures: state.ImagesReducer.pictures
+    pictures: state.ImagesReducer.pictures,
+    countOfItemsOnPage: state.ImagesReducer.countOfItemsOnPage as number
 })
 
 export default connect<MapState, MapDispatch, {}, GlobalState>(MapStateToProps, {getPictures, setPage})(ImagesList)

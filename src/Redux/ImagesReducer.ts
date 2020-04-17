@@ -5,7 +5,8 @@ import { GlobalState } from './redux-store'
 const initialState = {
     pictures: [] as Array<Image>,
     page: 1,
-    pageCount: null as number | null
+    pageCount: null as number | null,
+    countOfItemsOnPage: null as number | null
 }
 
 type State = typeof initialState
@@ -17,6 +18,7 @@ type SetPictures = {
     type: typeof SET_PICTURES
     pageCout: number
     pictures: Array<Image>
+    countOfItemsOnPage: number
 }
 
 type SetPage = {
@@ -32,7 +34,8 @@ const ImagesReducer = (state: State = initialState, action: ActionTypes): State 
             return {
                 ...state,
                 pictures: action.pictures,
-                pageCount: action.pageCout
+                pageCount: action.pageCout,
+                countOfItemsOnPage: action.countOfItemsOnPage
             }
         }
         case SET_PAGE: {
@@ -45,10 +48,11 @@ const ImagesReducer = (state: State = initialState, action: ActionTypes): State 
     }
 }
 
-const setPictures = (pageCout: number, pictures: Array<Image>): SetPictures => ({
+const setPictures = (pageCout: number, pictures: Array<Image>, countOfItemsOnPage: number): SetPictures => ({
     type: SET_PICTURES,
     pageCout,
-    pictures
+    pictures,
+    countOfItemsOnPage
 })
 
 export const setPage = (page: number): SetPage => ({
@@ -60,7 +64,7 @@ type Thunk =  ThunkAction<Promise<void>, GlobalState, unknown, ActionTypes>
 
 export const getPictures = (page: number, token: string): Thunk => async (dispatch) => {
     const data = await Images_API.getImages(page, token)
-    dispatch(setPictures(data.pageCount, data.pictures))   
+    dispatch(setPictures(data.pageCount, data.pictures, data.pictures.length))   
 }
 
 export default ImagesReducer

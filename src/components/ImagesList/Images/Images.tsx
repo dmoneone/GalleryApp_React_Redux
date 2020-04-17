@@ -13,7 +13,7 @@ const Images: FC<Props> = (props) => {
         <div>
             {
                 pictures.map( (pic) => {
-                    return <img src={pic.cropped_picture} />
+                    return <img key={Math.random()} src={pic.cropped_picture} />
                 })
             }
         </div>
