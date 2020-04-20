@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { GlobalState } from '../../Redux/redux-store'
-import { getPictures, setPage } from './../../Redux/ImagesReducer'
-import { Image } from '../../API/api'
+import { getPictures, setPage, getCurrentPicture } from './../../Redux/ImagesReducer'
+import { ImageType, GetImageRes } from '../../API/api'
 import Paginator from '../Paginator/Paginator'
 import Images from './Images/Images'
 
@@ -10,13 +10,15 @@ type MapState = {
     token: string
     page: number
     pageCount: number
-    pictures: Array<Image>
+    pictures: Array<ImageType>
     countOfItemsOnPage: number
+    currentPicture: GetImageRes
 }
 
 type MapDispatch = {
     getPictures: (page: number, token: string) => void
     setPage: (page: number) => void
+    getCurrentPicture: (id: string, token: string) => void
 }
 
 type Props = MapState & MapDispatch
@@ -40,6 +42,9 @@ class ImagesList extends React.Component<Props, {}> {
                />
                <Images
                     pictures={this.props.pictures}
+                    getCurrentPicture={this.props.getCurrentPicture}
+                    token={this.props.token}
+                    currentPicture={this.props.currentPicture}
                />
             </div>
         )
@@ -51,7 +56,8 @@ const MapStateToProps = (state: GlobalState): MapState => ({
     page: state.ImagesReducer.page,
     pageCount: state.ImagesReducer.pageCount as number,
     pictures: state.ImagesReducer.pictures,
-    countOfItemsOnPage: state.ImagesReducer.countOfItemsOnPage as number
+    countOfItemsOnPage: state.ImagesReducer.countOfItemsOnPage as number,
+    currentPicture: state.ImagesReducer.currentPicture as GetImageRes
 })
 
-export default connect<MapState, MapDispatch, {}, GlobalState>(MapStateToProps, {getPictures, setPage})(ImagesList)
+export default connect<MapState, MapDispatch, {}, GlobalState>(MapStateToProps, {getPictures, setPage, getCurrentPicture})(ImagesList)

@@ -4,3 +4,7 @@
   display: block;
   margin: 0 auto;
 }
+
+.__react_modal_image__caption{
+  white-space: pre-line;
+}

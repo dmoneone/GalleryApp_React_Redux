@@ -16,6 +16,9 @@
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-fullscreen-image": "0.0.3",
+    "react-magnifier": "^3.0.4",
+    "react-modal-image": "^2.5.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
@@ -45,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.10"
+    "@types/classnames": "^2.2.10",
+    "@types/react-addons-css-transition-group": "^15.0.5"
   }
 }

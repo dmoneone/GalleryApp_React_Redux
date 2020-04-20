@@ -20,22 +20,31 @@ export const Auth_API = {
     }
 }
 
-export type Image = {
+export type ImageType = {
     id: string
     cropped_picture: string
 }
 
-type GetImages = {
-    pictures: Array<Image>
+type GetImagesRes = {
+    pictures: Array<ImageType>
     page: number
     pageCount: number
     hasMore: boolean
 }
 
+export type GetImageRes = {
+    id: string
+    author: string
+    camera: string
+    tags: string
+    cropped_picture: string
+    full_picture: string
+}
+
 export const Images_API = {
     getImages(page: number, token: string) {
         return instance
-            .get<GetImages>(`images?page=${page}`, {
+            .get<GetImagesRes>(`images?page=${page}`, {
                 headers: {
                     Authorization: token
                 }
@@ -44,10 +53,11 @@ export const Images_API = {
     },
     getImage(id: any, token: string) {
         return instance
-        .get(`images/${id}`, {
+        .get<GetImageRes>(`images/${id}`, {
             headers: {
                 Authorization: token
             }
         })
+        .then(res => res.data)
     }
 }

@@ -39,7 +39,7 @@ const Paginator: FC<Props> = props => {
                         .filter(p => p >= leftBorderPositionOfPortion && p <= rightBorderPositionOfPortion)
                         .map( (p) => {
                             return <li 
-                                        key={p * Math.random()}
+                                        key={p}
                                         onClick={() => onSetPage(p)}
                                         className={ cn({[c.selected]: p === page})}
                                     >
