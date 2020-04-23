@@ -7,7 +7,8 @@ const initialState = {
     page: 1,
     pageCount: null as number | null,
     countOfItemsOnPage: null as number | null,
-    currentPicture: null as GetImageRes | null
+    currentPicture: null as GetImageRes | null,
+    isFetching: false
 }
 
 type State = typeof initialState
@@ -15,6 +16,7 @@ type State = typeof initialState
 const SET_PICTURES = 'gallery-app/ImagesReducer/SET-PICTURES'
 const SET_PAGE = 'gallery-app/ImagesReducer/SET-PAGE'
 const SET_CURRENT_PICTURE = 'gallery-app/ImagesReducer/SET-CURRENT-PICTURE'
+const SET_FETCHING = 'gallery-app/ImagesReducer/IS-FETCHING'
 
 type SetPictures = {
     type: typeof SET_PICTURES
@@ -33,7 +35,12 @@ type SetPage = {
     page: number
 }
 
-type ActionTypes = SetPictures | SetPage | SetCurrentPicture
+type SetFetching = {
+    type: typeof SET_FETCHING,
+    isFetching: boolean
+}
+
+type ActionTypes = SetPictures | SetPage | SetCurrentPicture | SetFetching
 
 const ImagesReducer = (state: State = initialState, action: ActionTypes): State => {
     switch(action.type) {
@@ -57,6 +64,12 @@ const ImagesReducer = (state: State = initialState, action: ActionTypes): State 
                 currentPicture: action.pictures
             }
         }
+        case SET_FETCHING: {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
         default: return state
     }
 }
@@ -78,11 +91,18 @@ export const setPage = (page: number): SetPage => ({
     page
 })
 
+export const setFetching = (isFetching: boolean): SetFetching => ({
+    type: SET_FETCHING,
+    isFetching
+})
+
 type Thunk =  ThunkAction<Promise<void>, GlobalState, unknown, ActionTypes>
 
 export const getPictures = (page: number, token: string): Thunk => async (dispatch) => {
+    dispatch(setFetching(true))
     const data = await Images_API.getImages(page, token)
-    dispatch(setPictures(data.pageCount, data.pictures, data.pictures.length))   
+    dispatch(setPictures(data.pageCount, data.pictures, data.pictures.length))  
+    dispatch(setFetching(false)) 
 }
 
 export const getCurrentPicture = (id: string, token: string): Thunk => async (dispatch) => {

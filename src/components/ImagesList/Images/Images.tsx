@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import Picture from './Image/Image'
 import { ImageType, GetImageRes } from './../../../API/api'
+import c from './Images.module.scss'
 
 type OwnProps = {
     pictures: Array<ImageType>
@@ -14,7 +15,7 @@ type Props = OwnProps
 const Images: FC<Props> = (props) => {
     const { pictures, getCurrentPicture, token, currentPicture } = props
     return (
-        <div>
+        <div className={c['images-container']}>
             {
                 pictures.map( (pic) => {
                     return <Picture 

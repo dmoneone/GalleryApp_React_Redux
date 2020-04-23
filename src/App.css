@@ -1,10 +1,26 @@
 .App {
-  max-width: 1000px;
+  max-width: 920px;
   width: 100%;
   display: block;
   margin: 0 auto;
+  margin-bottom: 150px;
 }
 
 .__react_modal_image__caption{
   white-space: pre-line;
+  font-family: Tahoma;
+}
+
+.header{
+  width: 100%;
+  padding: 20px 10px 20px 10px;
+  border-bottom: 1px solid grey;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+}
+
+.header > span {
+  font-family: Tahoma;
+  color: grey;
+  font-size: 30px;
 }

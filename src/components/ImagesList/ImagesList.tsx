@@ -5,6 +5,7 @@ import { getPictures, setPage, getCurrentPicture } from './../../Redux/ImagesRed
 import { ImageType, GetImageRes } from '../../API/api'
 import Paginator from '../Paginator/Paginator'
 import Images from './Images/Images'
+import Header from '../Header/Header'
 
 type MapState = {
     token: string
@@ -13,6 +14,7 @@ type MapState = {
     pictures: Array<ImageType>
     countOfItemsOnPage: number
     currentPicture: GetImageRes
+    isFetching: boolean
 }
 
 type MapDispatch = {
@@ -34,17 +36,19 @@ class ImagesList extends React.Component<Props, {}> {
     render() {
         return (
             <div>
+                <Header/>
+                <Images
+                    pictures={this.props.pictures}
+                    getCurrentPicture={this.props.getCurrentPicture}
+                    token={this.props.token}
+                    currentPicture={this.props.currentPicture}
+               />
                <Paginator
                     pageCount={this.props.pageCount}
                     page={this.props.page}
                     loadPictures={this.loadPictures}
                     countOfItemsOnPage={this.props.countOfItemsOnPage}
-               />
-               <Images
-                    pictures={this.props.pictures}
-                    getCurrentPicture={this.props.getCurrentPicture}
-                    token={this.props.token}
-                    currentPicture={this.props.currentPicture}
+                    isFetching={this.props.isFetching}
                />
             </div>
         )
@@ -57,7 +61,8 @@ const MapStateToProps = (state: GlobalState): MapState => ({
     pageCount: state.ImagesReducer.pageCount as number,
     pictures: state.ImagesReducer.pictures,
     countOfItemsOnPage: state.ImagesReducer.countOfItemsOnPage as number,
-    currentPicture: state.ImagesReducer.currentPicture as GetImageRes
+    currentPicture: state.ImagesReducer.currentPicture as GetImageRes,
+    isFetching: state.ImagesReducer.isFetching
 })
 
 export default connect<MapState, MapDispatch, {}, GlobalState>(MapStateToProps, {getPictures, setPage, getCurrentPicture})(ImagesList)

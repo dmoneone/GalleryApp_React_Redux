@@ -1,13 +1,32 @@
+.paginator-wrap{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
 .pages {
     display: flex;
+    button {
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        outline: none;
+        cursor: pointer;
+        img{
+            width: 30px;
+            vertical-align: middle;
+        }
+    }
     li {
         padding: 10px;
         box-sizing: border-box;
-        border: 1px solid black;
         cursor: pointer;
+        font-family: Tahoma;
+        font-size: 16px;
     }
 }
 
 .selected {
-    background: grey;
+    background: lightgrey;
+    color: #000;
 }
