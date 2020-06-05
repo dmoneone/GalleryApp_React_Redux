@@ -15,6 +15,7 @@
     "classnames": "^2.2.6",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.13.1",
     "react-fullscreen-image": "0.0.3",
     "react-magnifier": "^3.0.4",
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
+    "@types/radium": "^0.24.2",
     "@types/react-addons-css-transition-group": "^15.0.5"
   }
 }

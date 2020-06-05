@@ -13,14 +13,15 @@ type OwnProps = {
 
 type Props = OwnProps
 
-const Picture: FC<Props> = props => {
+
+const Picture: FC<Props> = React.memo(props => {
     const { src, id, token, getCurrentPicture, currentPicture } = props
 
     return (
-        <div onClick={ () => getCurrentPicture(id, token) } className={c['img-wrap'] }>
+        <div onClick={ () => getCurrentPicture(id, token) } className={c['img-wrap'] } >
             <ModalImage src={src} currentPicture={currentPicture}/>
         </div>
     )
-}
+})
 
 export default Picture

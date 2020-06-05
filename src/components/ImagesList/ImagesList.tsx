@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { GlobalState } from '../../Redux/redux-store'
-import { getPictures, setPage, getCurrentPicture } from './../../Redux/ImagesReducer'
+import { getPictures, actions, getCurrentPicture } from './../../Redux/ImagesReducer'
 import { ImageType, GetImageRes } from '../../API/api'
 import Paginator from '../Paginator/Paginator'
 import Images from './Images/Images'
 import Header from '../Header/Header'
+
+const setPage = actions.setPage
 
 type MapState = {
     token: string
